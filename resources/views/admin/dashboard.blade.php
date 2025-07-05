@@ -24,10 +24,10 @@
                         <th scope="col">Aksi</th>
                     </tr>
                 </thead>
-                <tbody>
+                <tbody >
                     @for ($i = 0; $i < 7; $i++)
                         <tr>
-                            <td style="width: 100px;">
+                            <td style="width: 150px;">
                                 <img src="{{ asset('static/dummy.png') }}" alt="Thumbnail" class="img-fluid">
                             </td>
                             <td>
