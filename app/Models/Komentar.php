@@ -18,4 +18,10 @@ class Komentar extends Model
         'id_berita',
         'id_pengguna',
     ];
+
+    public function pengguna()
+    {
+        return $this->belongsTo(Pengguna::class, 'id_pengguna');
+    }
+
 }

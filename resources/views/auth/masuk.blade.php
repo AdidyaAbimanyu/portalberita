@@ -8,10 +8,10 @@
             <div class="col-md-6">
                 <!-- Judul -->
                 <h3 class="fw-bold">Masuk</h3>
-                <p>Belum punya akun? <a href="#" class="text-primary text-decoration-none">Daftar Disini</a></p>
+                <p>Belum punya akun? <a href="{{ route('ShowRegis') }}" class="text-primary text-decoration-none">Daftar Disini</a></p>
 
                 <!-- Form -->
-                <form action="#" method="POST">
+                <form action="{{ route('login') }}" method="POST">
                     @csrf
                     <!-- Email -->
                     <div class="mb-3">

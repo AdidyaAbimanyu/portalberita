@@ -31,13 +31,14 @@
     <div class="container py-4">
         <div class="row justify-content-center">
             <div class="col-md-8">
-                <form action="{{ route('berita.store') }}" method="POST" enctype="multipart/form-data">
+                <form action="{{ route('berita.update', $berita->id_berita) }}" method="POST" enctype="multipart/form-data">
                     @csrf
+                    @method('PUT')
                     <!-- Judul Field -->
                     <div class="mb-3">
                         <label for="judul" class="form-label">Judul</label>
                         <input type="text" class="form-control @error('judul') is-invalid @enderror" id="judul"
-                            name="judul" value="{{ old('judul') }}" placeholder="Masukkan judul">
+                            name="judul" value="{{ old('judul', $berita->judul) }}" placeholder="Masukkan judul">
                         @error('judul')
                             <div class="invalid-feedback">
                                 {{ $message }}
@@ -49,7 +50,7 @@
                     <div class="mb-3">
                         <label for="sub_judul" class="form-label">Sub Judul</label>
                         <input type="text" class="form-control @error('sub_judul') is-invalid @enderror" id="sub_judul"
-                            name="sub_judul" value="{{ old('sub_judul') }}" placeholder="Masukkan sub judul">
+                            name="sub_judul" value="{{ old('sub_judul', $berita->sub_judul) }}" placeholder="Masukkan sub judul">
                         @error('sub_judul')
                             <div class="invalid-feedback">
                                 {{ $message }}
@@ -61,7 +62,7 @@
                     <div class="mb-3">
                         <label for="isi" class="form-label">Isi</label>
                         <textarea class="form-control @error('isi') is-invalid @enderror" id="isi" name="isi" rows="6"
-                            placeholder="Masukkan isi konten">{{ old('isi') }}</textarea>
+                            placeholder="Masukkan isi konten">{{ old('isi', $berita->isi) }}</textarea>
                         @error('isi')
                             <div class="invalid-feedback">
                                 {{ $message }}
@@ -99,7 +100,7 @@
                                 ];
                             @endphp
                             @foreach ($categories as $category)
-                                <option value="{{ $category }}" {{ old('kategori') == $category ? 'selected' : '' }}>
+                                <option value="{{ $category }}" {{ old('kategori', $berita->kategori) == $category ? 'selected' : '' }}>
                                     {{ $category }}
                                 </option>
                             @endforeach

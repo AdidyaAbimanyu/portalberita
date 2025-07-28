@@ -2,7 +2,6 @@
 
 namespace App\Models;
 
-// use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -12,6 +11,7 @@ class Pengguna extends Authenticatable
     use HasFactory, Notifiable;
 
     protected $table = 'pengguna';
+    protected $primaryKey = 'id_pengguna';
 
     /**
      * The attributes that are mass assignable.
@@ -43,7 +43,7 @@ class Pengguna extends Authenticatable
     protected function casts(): array
     {
         return [
-            'password' => 'hashed',
+            'email_verified_at' => 'datetime',
         ];
     }
 }

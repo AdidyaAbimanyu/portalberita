@@ -10,6 +10,7 @@
     <link href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" rel="stylesheet">
     <link rel="icon" href="{{ asset('static/logo.png') }}" type="image/x-icon">
     <link href="{{ asset('static/css/app.css') }}" rel="stylesheet">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     @stack('styles')
     <style>
         body {
@@ -19,6 +20,7 @@
 </head>
 
 <body>
+
     @include('partials.navbar')
     @include('partials.sidebar')
 

@@ -3,13 +3,12 @@
 
     <!-- Menu Atas -->
     <ul class="nav flex-column gap-3">
-        <li><a href="#" class="nav-link text-dark fw-normal small">Home</a></li>
-        <li><a href="#" class="nav-link text-dark fw-normal small">Terbaru</a></li>
-        <li><a href="#" class="nav-link text-dark fw-normal small">Bisnis</a></li>
-        <li><a href="#" class="nav-link text-dark fw-normal small">Pasar</a></li>
-        <li><a href="#" class="nav-link text-dark fw-normal small">Teknologi</a></li>
-        <li><a href="#" class="nav-link text-dark fw-normal small">Gaya Hidup</a></li>
-        <li><a href="#" class="nav-link text-dark fw-normal small">Tentang</a></li>
+        <li><a href="{{ route('home') }}" class="nav-link text-dark fw-normal small">Home</a></li>
+        <li><a href="{{ route('cari') }}" class="nav-link text-dark fw-normal small">Terbaru</a></li>
+        <li><a href="{{ route('cari', ['query' => 'Bisnis']) }}" class="nav-link text-dark fw-normal small">Bisnis</a></li>
+        <li><a href="{{ route('cari', ['query' => 'Pasar']) }}" class="nav-link text-dark fw-normal small">Pasar</a></li>
+        <li><a href="{{ route('cari', ['query' => 'Teknologi']) }}" class="nav-link text-dark fw-normal small">Teknologi</a></li>
+        <li><a href="{{ route('cari', ['query' => 'Gaya Hidup']) }}" class="nav-link text-dark fw-normal small">Gaya Hidup</a></li>
     </ul>
 
     <div class="container mt-5">
