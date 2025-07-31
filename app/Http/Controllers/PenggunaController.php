@@ -133,6 +133,11 @@ class PenggunaController extends Controller
 
     public function addKomentar(Request $request, $id)
     {
+
+        if (!auth()->check()) {
+            return redirect()->route('ShowLogin')->with('error', 'Silakan login terlebih dahulu');
+        }
+
         $request->validate([
             'isi' => 'required|string|max:1000',
         ]);
@@ -142,7 +147,7 @@ class PenggunaController extends Controller
         Komentar::create([
             'isi' => $request->isi,
             'id_berita' => $berita->id_berita,
-            'id_pengguna' => auth()->id(),
+            'id_pengguna' => auth()->user()->getKey(),
         ]);
 
         return redirect()->back()->with('success', 'Komentar berhasil dikirim!');
