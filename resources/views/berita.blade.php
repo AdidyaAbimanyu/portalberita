@@ -56,11 +56,6 @@
             <div class="p-3 mb-3 bg-light rounded">
                 <p class="fw-bold mb-1">{{ $komentar->pengguna->nama ?? 'Anonim' }}</p>
                 <p class="mb-2">{{ $komentar->isi }}</p>
-                <p class="text-muted">
-                    Komentar oleh ID {{ $komentar->id_pengguna }} |
-                    Anda ID: {{ auth()->check() ? auth()->user()->getKey() : 'Tidak login' }}
-                </p>
-
                 @auth
                     @if (auth()->user()->getKey() == $komentar->id_pengguna)
                         <form id="form-hapus-{{ $komentar->id_komentar }}"
