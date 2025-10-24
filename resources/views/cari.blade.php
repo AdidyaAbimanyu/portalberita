@@ -17,7 +17,7 @@
         </div>
 
         <!-- Heading -->
-        <h5 class="fw-semibold mb-4">Berita Terbaru dari WiNews</h5>
+        <h5 class="fw-semibold mb-4">Berita dari WiNews</h5>
 
         <!-- List of Berita -->
         @foreach ($beritas as $berita)
