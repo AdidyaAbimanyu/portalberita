@@ -7,9 +7,8 @@
         <!-- Search Box -->
         <div class="mb-4 border-bottom pb-2">
             <form action="" method="GET" class="d-flex align-items-center">
-                <input type="text" name="query" class="form-control border-0 shadow-none fs-5" placeholder="Mencari berita..."
-                       value="{{ request('query') }}"
-                    style="height: 48px;">
+                <input type="text" name="query" class="form-control border-0 shadow-none fs-5"
+                    placeholder="Mencari berita..." value="{{ request('query') }}" style="height: 48px;">
                 <button class="btn bg-transparent text-dark" type="submit">
                     <i class="bi bi-search fs-4"></i>
                 </button>
@@ -23,8 +22,8 @@
         @foreach ($beritas as $berita)
             <div class="row mb-4 border-bottom pb-3">
                 <div class="col-md-4">
-                    <img src="{{ asset($berita->gambar) }}" alt="Gambar Berita" class="img-fluid"
-                        style="max-height: 200px; object-fit: cover;">
+                    <img src="{{ asset($berita->gambar) }}" alt="Gambar Berita" class="img-fluid w-100"
+                        style="height: 200px; object-fit: cover;">
                 </div>
                 <div class="col-md-8">
                     <p class="text-uppercase fw-semibold text-secondary small mb-1">

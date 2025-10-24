@@ -28,10 +28,11 @@
                     @forelse ($beritas as $berita)
                         <tr>
                             <td style="width: 150px;">
-                                <img src="{{ asset($berita->gambar) }}" alt="Thumbnail" class="img-fluid">
+                                <img src="{{ asset($berita->gambar) }}" alt="Thumbnail" class="img-fluid w-100"
+                                    style="height: 100px; object-fit: cover;">
                             </td>
-                            <td>{{ $berita->judul }}</td>
-                            <td>{{ $berita->sub_judul }}</td>
+                            <td>{{ Str::limit($berita->judul, 50) }}</td>
+                            <td>{{ Str::limit($berita->sub_judul, 50) }}</td>
                             <td>{{ Str::limit($berita->isi, 50) }}</td>
                             <td>{{ $berita->kategori }}</td>
                             <td>
