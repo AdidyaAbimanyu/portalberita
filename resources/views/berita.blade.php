@@ -12,10 +12,15 @@
         --border-light: #E9ECEF;
     }
 
+    body {
+        overflow-x: hidden;
+    }
+
     .article-container {
         max-width: 900px;
         margin: 0 auto;
         padding: 3rem 1rem;
+        overflow-x: hidden;
     }
 
     .article-header {
@@ -28,6 +33,8 @@
         line-height: 1.2;
         color: var(--primary-color);
         margin-bottom: 1rem;
+        word-wrap: break-word;
+        overflow-wrap: break-word;
     }
 
     .article-subtitle {
@@ -36,6 +43,8 @@
         line-height: 1.6;
         font-weight: 400;
         margin-bottom: 2rem;
+        word-wrap: break-word;
+        overflow-wrap: break-word;
     }
 
     .article-meta {
@@ -66,6 +75,7 @@
         color: white;
         font-weight: 700;
         font-size: 1.2rem;
+        flex-shrink: 0;
     }
 
     .author-details {
@@ -98,6 +108,7 @@
         display: flex;
         align-items: center;
         gap: 0.5rem;
+        flex-shrink: 0;
     }
 
     .share-button:hover {
@@ -134,11 +145,18 @@
         line-height: 1.8;
         color: #333;
         margin-bottom: 3rem;
+        word-wrap: break-word;
+        overflow-wrap: break-word;
+        word-break: break-word;
     }
 
     .article-content p {
         margin-bottom: 1.5rem;
         text-align: justify;
+        word-wrap: break-word;
+        overflow-wrap: break-word;
+        word-break: break-word;
+        max-width: 100%;
     }
 
     .comments-section {
@@ -146,6 +164,7 @@
         margin: 0 auto;
         padding: 3rem 1rem;
         border-top: 2px solid var(--border-light);
+        overflow-x: hidden;
     }
 
     .comments-header {
@@ -186,6 +205,7 @@
         font-size: 1rem;
         transition: all 0.3s ease;
         resize: vertical;
+        width: 100%;
     }
 
     .comment-form textarea:focus {
@@ -218,6 +238,7 @@
         box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
         transition: all 0.3s ease;
         border-left: 4px solid transparent;
+        overflow-x: hidden;
     }
 
     .comment-item:hover {
@@ -244,6 +265,7 @@
         color: white;
         font-weight: 700;
         font-size: 1rem;
+        flex-shrink: 0;
     }
 
     .comment-author {
@@ -258,6 +280,10 @@
         line-height: 1.6;
         color: #555;
         margin-bottom: 1rem;
+        word-wrap: break-word;
+        overflow-wrap: break-word;
+        word-break: break-word;
+        max-width: 100%;
     }
 
     .btn-delete-comment {

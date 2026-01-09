@@ -31,7 +31,7 @@ class BeritaSeeder extends Seeder
                     'isi' => Str::random(200),
                     'gambar' => $gambarPath,
                     'kategori' => $kategori,
-                    'id_pengguna' => 2, // sesuaikan dengan user yang ada
+                    'id_pengguna' => 1, // sesuaikan dengan user yang ada
                     'created_at' => now(),
                     'updated_at' => now(),
                 ]);
