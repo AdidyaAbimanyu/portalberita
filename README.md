@@ -1,66 +1,189 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# WiNews
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+WiNews is a Laravel-based news portal for reading, searching, and managing Indonesian-language articles.
 
-## About Laravel
+## Overview
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+The application provides a public news-reading experience and an authenticated editorial area. Readers can browse a featured story and category sections, search articles, open article pages, and participate in comment threads. Administrators can create, edit, and delete articles.
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+The repository includes both the application source and a Laravel 11 project scaffold. The implementation uses server-rendered Blade views and Laravel web routes; it does not expose a separate API.
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+## Features
 
-## Learning Laravel
+- **Editorial homepage:** Displays the most-viewed article, recent articles, and stories from eight configured categories.
+- **Article pages:** Shows article content, author information, publication date, view tracking, and comments. The share control copies the current page URL.
+- **Article search:** Searches article titles, subtitles, and body text. The current controller returns at most 10 results.
+- **Accounts and comments:** Supports registration, login, logout, authenticated comment submission, and deletion of a user's own comments.
+- **Editorial management:** Administrators can create, update, and delete articles, including uploading JPG or PNG images up to 2 MB.
+- **Responsive interface:** Blade views use shared layouts and custom Vite-managed CSS and JavaScript.
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+## Tech Stack
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+- **Backend:** PHP 8.2+, Laravel 11, Blade, Eloquent ORM
+- **Frontend:** HTML, custom CSS, vanilla JavaScript, Bootstrap 5.3 (CDN), Vite 5
+- **JavaScript package:** Axios
+- **Database:** SQLite is the default in `.env.example`; Laravel database configuration also defines other connection drivers.
+- **Testing:** PHPUnit 11 through Laravel's test runner
+- **Dependency managers:** Composer and npm
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+## Project Structure
 
-## Laravel Sponsors
+```text
+app/
+  Http/Controllers/       Public account, article, and admin request handling
+  Http/Middleware/        Role-based route middleware
+  Models/                 Article, user, and comment models
+bootstrap/                Laravel application bootstrap
+config/                   Application, authentication, database, and service configuration
+database/
+  migrations/             Application and Laravel infrastructure tables
+  seeders/                Sample users, articles, and comments
+public/
+  berita/                 Uploaded and sample article images
+  static/                 Shared image assets
+  index.php               HTTP entry point
+resources/
+  css/                    Vite entry stylesheet and design system
+  js/                     Vite entry JavaScript
+  views/                  Public, authentication, and admin Blade templates
+routes/
+  web.php                 Named web routes
+tests/
+  Feature/                HTTP feature tests
+  Unit/                   Unit tests
+```
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+### Data model
 
-### Premium Partners
+The core application tables are:
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[WebReinvent](https://webreinvent.com/)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Jump24](https://jump24.co.uk)**
-- **[Redberry](https://redberry.international/laravel/)**
-- **[Active Logic](https://activelogic.com)**
-- **[byte5](https://byte5.de)**
-- **[OP.GG](https://op.gg)**
+- `pengguna`: user name, email, password, and role.
+- `berita`: title, subtitle, body, image path, category, view count, author, and timestamps.
+- `komentar`: comment body and references to its article and author.
 
-## Contributing
+Articles belong to a user and have many comments. Comments belong to an article and a user. The migrations also create Laravel support tables for sessions, cache, and queued jobs.
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+## Installation and Setup
 
-## Code of Conduct
+### Prerequisites
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+- PHP 8.2 or newer, with the extensions required by Laravel. The repository's CI workflow enables `pdo_sqlite` for SQLite.
+- Composer
+- Node.js and npm (Vite 5 requires a supported Node.js runtime)
+- SQLite for the default local database configuration
 
-## Security Vulnerabilities
+### Local development
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+1. Install PHP dependencies:
+
+   ```sh
+   composer install
+   ```
+
+2. Create the local environment file. Use the command for your shell:
+
+   ```powershell
+   Copy-Item .env.example .env
+   ```
+
+   ```sh
+   cp .env.example .env
+   ```
+
+3. Generate an application key and create the default SQLite database file if it does not exist:
+
+   ```sh
+   php artisan key:generate
+   php -r "file_exists('database/database.sqlite') || touch('database/database.sqlite');"
+   ```
+
+4. Install frontend dependencies:
+
+   ```sh
+   npm ci
+   ```
+
+5. Apply database migrations:
+
+   ```sh
+   php artisan migrate
+   ```
+
+6. Build frontend assets:
+
+   ```sh
+   npm run build
+   ```
+
+7. Start the Laravel development server:
+
+   ```sh
+   php artisan serve
+   ```
+
+   Open the local URL printed by Artisan, usually `http://127.0.0.1:8000`.
+
+For frontend development with Vite's watcher, run `npm run dev` in a separate terminal while the Laravel server is running.
+
+### Optional sample data
+
+For a fresh local database only, sample content can be inserted with:
+
+```sh
+php artisan db:seed
+```
+
+The seeders create sample accounts, 80 articles, and comments. The user seeder contains fixed demo credentials in source code; inspect and replace them before local use, and never run these seeders in production.
+
+## Usage
+
+The existing named web routes include:
+
+| Page or action | Method | Path |
+| --- | --- | --- |
+| Homepage | `GET` | `/` |
+| Login form | `GET` | `/authlogin` |
+| Registration form | `GET` | `/authregister` |
+| Login | `POST` | `/login` |
+| Registration | `POST` | `/register` |
+| Logout | `POST` | `/logout` |
+| Search | `GET` | `/cari` |
+| Article detail | `GET` | `/berita/{id}` |
+| Admin dashboard | `GET` | `/admin/dashboard` |
+| New article form | `GET` | `/admin/berita/form` |
+| Create article | `POST` | `/admin/berita/store` |
+| Edit article form | `GET` | `/admin/berita/{id}/edit` |
+| Update article | `PUT` | `/admin/berita/{id}` |
+| Delete article | `DELETE` | `/admin/berita/{id}` |
+| Add comment | `POST` | `/berita/{id}/komentar` |
+| Delete comment | `DELETE` | `/komentar/{id}` |
+
+Search accepts a `query` parameter, for example `/cari?query=Teknologi`. Admin article-management routes require an authenticated user with the `admin` role. Comment routes require authentication; comment deletion checks that the current user owns the comment.
+
+## Screenshots
+
+Screenshots are not currently included in the repository. Add captures of the public homepage, article page, search results, and admin interface when publishing a portfolio preview.
+
+## Testing
+
+Run the test suite with:
+
+```sh
+php artisan test
+```
+
+The current suite contains one basic homepage response test and one placeholder unit test. The GitHub Actions workflow runs PHPUnit on PHP 8.2 and 8.3. These tests do not currently cover authentication, article management, search, comments, or database migrations.
+
+## Known Limitations and Future Improvements
+
+The following are observations or proposals, not claims of implemented functionality:
+
+- **Review public role assignment before deployment.** The registration form and controller currently accept both `admin` and `pembaca` roles. Public self-registration can therefore request administrator access.
+- **Review demo account handling.** Seeder passwords are fixed in the repository. Replace the sample values and avoid seeding production databases.
+- **Improve search behavior.** Search currently checks title, subtitle, and article body, but not the category column; it also returns at most 10 results without pagination.
+- **Expand automated coverage.** Add tests for authentication and authorization, article CRUD, search, comments, and migrations.
+- **Add maintained screenshots.** Capture current public and admin pages for portfolio visitors.
 
 ## License
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+`composer.json` declares the project package as MIT licensed. A `LICENSE` file is not present in the repository; confirm the intended distribution terms before publishing.
