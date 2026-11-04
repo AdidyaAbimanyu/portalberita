@@ -1,55 +1,41 @@
-<nav class="navbar navbar-expand-lg px-5 fixed-top"
-    style="background-color: #F3F1ED; border-bottom: 1px solid #ddd; height: 105px;">
-    <div class="container-fluid d-flex justify-content-between align-items-center px-5 h-100">
+@php
+    $navigationCategories = ['Bisnis', 'Pasar', 'Teknologi', 'Gaya Hidup', 'Politik', 'Olahraga', 'Pendidikan', 'Budaya'];
+@endphp
 
-        <!-- Kiri: Logo -->
-        <div class="d-flex align-items-center">
-            <a href="{{ route('home') }}">
-                <img class="navbar-brand fw-bold m-0" src="{{ asset('static/logo.png') }}" alt="Logo"
-                    style="height: 105px;">
-            </a>
-        </div>
-
-        <!-- Tengah Kiri: Icon Search + "Cari" -->
-        <a href="{{ route('cari') }}" class="d-flex align-items-center gap-2 text-decoration-none text-dark">
-            <img src="{{ asset('static/search.svg') }}" alt="">
-            <p class="mt-3" style="font-size: 16px;">Cari</p>
-        </a>
-
-        <!-- Tengah Tengah: Judul Besar -->
-        <div class="d-flex justify-content-center align-items-center">
-            <a href="{{ route('home') }}" class="text-decoration-none"><span class="fw-bold text-dark"
-                    style="font-size: 48px">WiNews</span></a>
-        </div>
-
-        <!-- Kanan -->
-        <div>
-            @if (Auth::check())
-                <!-- Jika user sudah login, tampilkan icon user + dropdown -->
-                <div class="dropdown">
-                    <a class="nav-link dropdown-toggle d-flex align-items-center" href="#" id="userDropdown"
-                        role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                        <img src="{{ asset('static/user.svg') }}" alt="">
-                    </a>
-                    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown">
-                        @if (Auth::user()->role == 'admin')
-                            <li><a class="dropdown-item" href="{{ route('dashboard') }}">Dashboard Admin</a></li>
-                            <li>
-                                <hr class="dropdown-divider">
-                            </li>
-                        @endif
-                        <li>
-                            <form action="{{ route('logout') }}" method="POST" class="d-inline">
-                                @csrf
-                                <button type="submit" class="dropdown-item">Logout</button>
-                            </form>
-                        </li>
-                    </ul>
-                </div>
+<header class="site-header">
+    <div class="masthead">
+        <a class="wordmark" href="{{ route('home') }}" aria-label="WiNews, beranda">WiNews<span class="wordmark__period">.</span></a>
+        <p class="masthead__note">Berita, dengan sudut pandang.</p>
+        <div class="masthead__actions">
+            <a class="header-link header-link--search" href="{{ route('cari') }}">Cari berita</a>
+            @auth
+                @if (Auth::user()->role === 'admin')
+                    <a class="header-link header-link--account" href="{{ route('dashboard') }}">Dashboard</a>
+                @endif
+                <form action="{{ route('logout') }}" method="POST" class="header-logout">
+                    @csrf
+                    <button class="header-link" type="submit">Keluar</button>
+                </form>
             @else
-                <!-- Jika belum login, tampilkan tombol login -->
-                <a href="{{ route('ShowLogin') }}" class="btn btn-outline-dark">Login</a>
-            @endif
+                <a class="header-link header-link--account" href="{{ route('ShowLogin') }}">Masuk</a>
+            @endauth
+            <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="section-navigation">
+                <span class="menu-toggle__lines" aria-hidden="true"></span>
+                <span class="menu-toggle__label">Rubrik</span>
+            </button>
         </div>
     </div>
-</nav>
+
+    <nav class="section-nav" id="section-navigation" aria-label="Rubrik berita">
+        <a class="section-nav__home" href="{{ route('home') }}">Beranda</a>
+        <a href="{{ route('cari') }}">Terbaru</a>
+        @foreach ($navigationCategories as $category)
+            <a href="{{ route('cari', ['query' => $category]) }}">{{ $category }}</a>
+        @endforeach
+        @auth
+            @if (Auth::user()->role === 'admin')
+                <a class="section-nav__admin" href="{{ route('dashboard') }}">Dashboard redaksi</a>
+            @endif
+        @endauth
+    </nav>
+</header>

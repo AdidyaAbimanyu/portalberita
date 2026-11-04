@@ -1,36 +1,61 @@
 @extends('layouts.app')
 
-@section('title', 'Masuk')
+@section('title', 'Masuk | WiNews')
 
 @section('content')
-    <div class="container py-5">
-        <div class="row justify-content-center">
-            <div class="col-md-6">
-                <!-- Judul -->
-                <h3 class="fw-bold">Masuk</h3>
-                <p>Belum punya akun? <a href="{{ route('ShowRegis') }}" class="text-primary text-decoration-none">Daftar Disini</a></p>
+    <section class="auth-page" aria-labelledby="auth-title">
+        <div class="auth-panel">
+            <p class="eyebrow">Akun WiNews</p>
+            <h1 id="auth-title">Masuk</h1>
+            <p class="auth-panel__intro">
+                Belum punya akun? <a href="{{ route('ShowRegis') }}">Daftar di sini</a>
+            </p>
 
-                <!-- Form -->
-                <form action="{{ route('login') }}" method="POST">
-                    @csrf
-                    <!-- Email -->
-                    <div class="mb-3">
-                        <label for="email" class="form-label">Email</label>
-                        <input type="email" class="form-control" id="email" name="email" placeholder="Email">
-                    </div>
+            @if ($errors->any())
+                <div class="auth-errors" role="alert">
+                    <ul>
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+            @endif
 
-                    <!-- Kata Sandi -->
-                    <div class="mb-4">
-                        <label for="password" class="form-label">Kata Sandi</label>
-                        <input type="password" class="form-control" id="password" name="password" placeholder="Kata Sandi">
-                    </div>
+            <form action="{{ route('login') }}" method="POST" class="auth-form">
+                @csrf
+                <div class="mb-3">
+                    <label for="email">Email</label>
+                    <input
+                        type="email"
+                        class="form-control @error('email') is-invalid @enderror"
+                        id="email"
+                        name="email"
+                        value="{{ old('email') }}"
+                        autocomplete="email"
+                        required
+                    >
+                    @error('email')
+                        <div class="invalid-feedback">{{ $message }}</div>
+                    @enderror
+                </div>
 
-                    <!-- Tombol -->
-                    <button type="submit" class="btn w-100 fw-bold text-white" style="background-color: #2a3b47;">
-                        Masuk
-                    </button>
-                </form>
-            </div>
+                <div class="mb-4">
+                    <label for="password">Kata sandi</label>
+                    <input
+                        type="password"
+                        class="form-control @error('password') is-invalid @enderror"
+                        id="password"
+                        name="password"
+                        autocomplete="current-password"
+                        required
+                    >
+                    @error('password')
+                        <div class="invalid-feedback">{{ $message }}</div>
+                    @enderror
+                </div>
+
+                <button type="submit" class="editorial-button">Masuk</button>
+            </form>
         </div>
-    </div>
+    </section>
 @endsection
