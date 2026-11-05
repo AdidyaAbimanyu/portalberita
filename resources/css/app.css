@@ -16,6 +16,20 @@
     --focus-ring: 0 0 0 3px rgba(184, 58, 45, .24);
 }
 
+html[data-theme="dark"] {
+    color-scheme: dark;
+    --paper: #0f1113;
+    --white: #1a1d21;
+    --ink: #e6e8ea;
+    --ink-soft: #b6bbc0;
+    --muted: #8a9096;
+    --rule: #2a2e33;
+    --rule-strong: #4a5056;
+    --accent: #e06a5a;
+    --accent-hover: #f08a7a;
+    --focus-ring: 0 0 0 3px rgba(224, 106, 90, .24);
+}
+
 * {
     box-sizing: border-box;
 }

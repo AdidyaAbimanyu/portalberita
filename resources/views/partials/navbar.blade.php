@@ -19,7 +19,13 @@
             @else
                 <a class="header-link header-link--account" href="{{ route('ShowLogin') }}">Masuk</a>
             @endauth
+            <button class="theme-toggle header-link" type="button" aria-label="Toggle dark theme" aria-pressed="false">
+                <span class="theme-toggle__icon" aria-hidden="true">◐</span>
+            </button>
             <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="section-navigation">
+                <span class="menu-toggle__lines" aria-hidden="true"></span>
+                <span class="menu-toggle__label">Rubrik</span>
+            </button>
                 <span class="menu-toggle__lines" aria-hidden="true"></span>
                 <span class="menu-toggle__label">Rubrik</span>
             </button>
