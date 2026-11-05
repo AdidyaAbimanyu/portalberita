@@ -26,9 +26,6 @@
                 <span class="menu-toggle__lines" aria-hidden="true"></span>
                 <span class="menu-toggle__label">Rubrik</span>
             </button>
-                <span class="menu-toggle__lines" aria-hidden="true"></span>
-                <span class="menu-toggle__label">Rubrik</span>
-            </button>
         </div>
     </div>
 
